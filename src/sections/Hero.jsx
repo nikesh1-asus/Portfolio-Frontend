@@ -90,7 +90,10 @@ export const Hero = () => {
         </h2>
 
         <p className="mt-4 text-gray-400 max-w-xl leading-relaxed">
-          I craft modern, scalable web applications using React, Next.js, and Django.
+          I build modern web applications using React, Next.js, and Django.
+          I have hands-on experience creating full-stack projects with clean and efficient code.
+          I contribute to open-source and collaborate with developers worldwide.
+          I use GitHub and Jira to manage projects and streamline teamwork.
         </p>
 
         {/* BUTTONS */}
