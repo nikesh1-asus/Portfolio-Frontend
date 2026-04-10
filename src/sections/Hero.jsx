@@ -81,7 +81,7 @@ export const Hero = () => {
       {/* TEXT */}
       <div className="w-full md:w-[42%] flex flex-col items-center text-center order-2 md:order-1">
 
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold md:whitespace-nowrap">
           Hi, I'm <span className="gradient-text">NIKESH OJHA</span>
         </h1>
 
