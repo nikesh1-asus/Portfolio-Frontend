@@ -4,16 +4,30 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+// Fix for __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+
+  // ✅ IMPORTANT: required for GitHub Pages
+  base: "/Dev-Personal-Portfolio/",
+
   resolve: {
     alias: {
-      '@': path.resolve(fileURLToPath(new URL('./src', import.meta.url))),
+      '@': path.resolve(__dirname, './src'),
     },
   },
+
   server: {
-    host: true,      // allows access from network (important)
-    port: 5173,      // default port (optional, you can change)
+    host: true,
+    port: 5173,
   },
+
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
+  }
 })
