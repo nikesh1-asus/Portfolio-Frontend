@@ -122,7 +122,7 @@ export const Testimonials = () => {
                 className="min-w-full text-foreground flex flex-col md:flex-row items-center"
               >
                 <div
-                  className={`w-full md:w-1/3 flex-shrink-0 transform transition-transform duration-500 flex items-center justify-center p-6 ${
+                  className={`w-full md:w-2/5 flex-shrink-0 transform transition-transform duration-500 flex items-center justify-center p-6 ${
                     isAnimatingPhoto && idx === activeIdx
                       ? "-translate-x-8 md:-translate-x-12"
                       : "translate-x-0"
@@ -131,7 +131,7 @@ export const Testimonials = () => {
                   <img
                     src={t.image}
                     alt={t.name}
-                    className="w-48 h-56 md:w-56 md:h-64 object-cover rounded-2xl animate-float border border-border bg-background"
+                    className="w-56 h-56 md:w-64 md:h-64 object-cover rounded-3xl animate-float border-2 border-primary/20 bg-background shadow-2xl"
                     loading="lazy"
                   />
                 </div>
