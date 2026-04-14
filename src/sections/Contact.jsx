@@ -185,7 +185,7 @@ export const Contact = () => {
 
                 <div>
                   <ReCAPTCHA
-                    sitekey="6LeHgrYsAAAAAErvq_UpinYPpZi46QCerMaqoCB1"
+                    sitekey="6LdJ57YsAAAAAEvf8SYAxzKOWuigevldBciAYOIz"
                     onChange={handleCaptchaChange}
                     ref={recaptchaRef}
                   />
