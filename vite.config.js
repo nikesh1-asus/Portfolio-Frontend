@@ -13,6 +13,6 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: "/", 
+  base: "/Dev-Personal-Portfolio/", // Match repository name exactly
   publicDir: "public",
 });
