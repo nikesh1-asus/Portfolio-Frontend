@@ -3,7 +3,8 @@ import { FiMapPin, FiPhone, FiMail, FiSend } from "react-icons/fi";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL?.replace(/\/$/, "") || "http://localhost:5000";
+  import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
+  "http://localhost:5000";
 
 export const Contact = () => {
   const recaptchaRef = useRef(null);
@@ -20,33 +21,42 @@ export const Contact = () => {
   const [success, setSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
+  // ---------------- INPUT HANDLER ----------------
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" });
   };
 
+  // ---------------- CAPTCHA ----------------
   const handleCaptchaChange = (value) => {
-    setCaptchaValue(value);
+    setCaptchaValue(value || null);
     setErrors({ ...errors, captcha: "" });
   };
 
+  // ---------------- VALIDATION ----------------
   const validate = () => {
     const newErrors = {};
+
     if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
     else if (!/\S+@\S+\.\S+/.test(formData.email))
       newErrors.email = "Invalid email";
+
     if (!formData.subject.trim()) newErrors.subject = "Subject is required";
     if (!formData.message.trim()) newErrors.message = "Message is required";
+
     if (!captchaValue) newErrors.captcha = "Please verify captcha";
+
     return newErrors;
   };
 
+  // ---------------- SUBMIT ----------------
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError("");
 
     const validationErrors = validate();
+
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
@@ -56,39 +66,54 @@ export const Contact = () => {
       const res = await fetch(`${API_BASE_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, captchaValue }),
+        body: JSON.stringify({
+          ...formData,
+          captchaValue: captchaValue || "",
+        }),
       });
 
       const data = await res.json();
 
       if (!res.ok || !data.success) {
-        setErrors({ captcha: data.message || "" });
         setSubmitError(data.message || "Failed to send message.");
+        setErrors({ captcha: data.message || "Captcha failed" });
         return;
       }
 
+      // success
       setSuccess(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+
       setCaptchaValue(null);
       recaptchaRef.current?.reset();
       setErrors({});
 
-      setTimeout(() => setSuccess(false), 6000);
+      setTimeout(() => setSuccess(false), 5000);
     } catch (err) {
       console.error(err);
       setSubmitError("Unable to reach the server. Please try again later.");
     }
   };
 
+  // ---------------- UI ----------------
   return (
     <section id="contact" className="py-16 bg-background/50">
       <div className="container mx-auto px-6 max-w-6xl">
+
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold">Contact Me</h2>
-          <p className="text-muted-foreground mt-2">Get in touch with me</p>
+          <p className="text-muted-foreground mt-2">
+            Get in touch with me
+          </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
+
           {/* LEFT SIDE */}
           <div className="space-y-8">
             <div className="flex items-center gap-4">
@@ -97,15 +122,6 @@ export const Contact = () => {
                 <h3 className="text-xl font-semibold">Location</h3>
                 <p>Simara -01 Bara, Nepal</p>
               </div>
-            </div>
-
-            <div className="w-full h-64 rounded-xl overflow-hidden">
-              <iframe
-                title="My Location"
-                width="100%"
-                height="100%"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=84.967%2C27.166%2C84.983%2C27.177&layer=mapnik&marker=27.171,84.975"
-              ></iframe>
             </div>
 
             <div className="flex items-center gap-4">
@@ -127,32 +143,28 @@ export const Contact = () => {
 
           {/* RIGHT SIDE */}
           <div>
+
             {!success && (
               <form className="space-y-6" onSubmit={handleSubmit}>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className={`p-4 border rounded-xl ${
-                      errors.name ? "border-red-500" : ""
-                    }`}
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={`p-4 border rounded-xl ${
-                      errors.email ? "border-red-500" : ""
-                    }`}
-                  />
-                </div>
 
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full p-4 border rounded-xl"
+                />
                 {errors.name && <p className="text-red-500">{errors.name}</p>}
+
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full p-4 border rounded-xl"
+                />
                 {errors.email && <p className="text-red-500">{errors.email}</p>}
 
                 <input
@@ -161,9 +173,7 @@ export const Contact = () => {
                   placeholder="Subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className={`w-full p-4 border rounded-xl ${
-                    errors.subject ? "border-red-500" : ""
-                  }`}
+                  className="w-full p-4 border rounded-xl"
                 />
                 {errors.subject && (
                   <p className="text-red-500">{errors.subject}</p>
@@ -175,28 +185,30 @@ export const Contact = () => {
                   placeholder="Message"
                   value={formData.message}
                   onChange={handleChange}
-                  className={`w-full p-4 border rounded-xl ${
-                    errors.message ? "border-red-500" : ""
-                  }`}
+                  className="w-full p-4 border rounded-xl"
                 />
                 {errors.message && (
                   <p className="text-red-500">{errors.message}</p>
                 )}
 
+                {/* CAPTCHA */}
                 <div>
                   <ReCAPTCHA
-                    sitekey="6LdJ57YsAAAAAEvf8SYAxzKOWuigevldBciAYOIz"
+                    sitekey="6LecFrcsAAAAANUxc3gZZKjT3AGKfu_BRT7_CAz5"
                     onChange={handleCaptchaChange}
                     ref={recaptchaRef}
                   />
+
                   {errors.captcha && (
-                    <p className="text-red-500">{errors.captcha}</p>
+                    <p className="text-red-500 mt-2">{errors.captcha}</p>
                   )}
+
                   {submitError && (
                     <p className="text-red-500 mt-2">{submitError}</p>
                   )}
                 </div>
 
+                {/* BUTTON */}
                 <button
                   type="submit"
                   className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl"
@@ -208,7 +220,7 @@ export const Contact = () => {
             )}
 
             {success && (
-              <p className="text-green-400 text-lg font-semibold text-center mt-6">
+              <p className="text-green-500 text-center text-lg font-semibold">
                 🚀 Message sent successfully!
               </p>
             )}
