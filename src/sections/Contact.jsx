@@ -21,16 +21,23 @@ export const Contact = () => {
   const [success, setSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
-  // ---------------- INPUT HANDLER ----------------
+  // ---------------- INPUT ----------------
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [e.target.name]: "",
+    }));
   };
 
   // ---------------- CAPTCHA ----------------
   const handleCaptchaChange = (value) => {
-    setCaptchaValue(value || null);
-    setErrors({ ...errors, captcha: "" });
+    setCaptchaValue(value);
+    setErrors((prev) => ({ ...prev, captcha: "" }));
   };
 
   // ---------------- VALIDATION ----------------
@@ -56,7 +63,6 @@ export const Contact = () => {
     setSubmitError("");
 
     const validationErrors = validate();
-
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
@@ -67,36 +73,34 @@ export const Contact = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...formData,
-          captchaValue: captchaValue || "",
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          captchaValue: captchaValue, // IMPORTANT
         }),
       });
 
       const data = await res.json();
 
       if (!res.ok || !data.success) {
-        setSubmitError(data.message || "Failed to send message.");
+        setSubmitError(data.message || "Captcha failed or server error");
         setErrors({ captcha: data.message || "Captcha failed" });
         return;
       }
 
-      // success
+      // SUCCESS
       setSuccess(true);
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
-
+      setFormData({ name: "", email: "", subject: "", message: "" });
       setCaptchaValue(null);
-      recaptchaRef.current?.reset();
-      setErrors({});
 
+      recaptchaRef.current?.reset();
+
+      setErrors({});
       setTimeout(() => setSuccess(false), 5000);
     } catch (err) {
       console.error(err);
-      setSubmitError("Unable to reach the server. Please try again later.");
+      setSubmitError("Unable to reach server. Try again.");
     }
   };
 
@@ -107,14 +111,12 @@ export const Contact = () => {
 
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold">Contact Me</h2>
-          <p className="text-muted-foreground mt-2">
-            Get in touch with me
-          </p>
+          <p className="text-muted-foreground mt-2">Get in touch</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
 
-          {/* LEFT SIDE */}
+          {/* LEFT */}
           <div className="space-y-8">
             <div className="flex items-center gap-4">
               <FiMapPin className="text-primary text-2xl" />
@@ -141,62 +143,54 @@ export const Contact = () => {
             </div>
           </div>
 
-          {/* RIGHT SIDE */}
+          {/* RIGHT */}
           <div>
-
             {!success && (
-              <form className="space-y-6" onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} className="space-y-6">
 
                 <input
-                  type="text"
                   name="name"
-                  placeholder="Name"
                   value={formData.name}
                   onChange={handleChange}
+                  placeholder="Name"
                   className="w-full p-4 border rounded-xl"
                 />
                 {errors.name && <p className="text-red-500">{errors.name}</p>}
 
                 <input
-                  type="email"
                   name="email"
-                  placeholder="Email"
                   value={formData.email}
                   onChange={handleChange}
+                  placeholder="Email"
                   className="w-full p-4 border rounded-xl"
                 />
                 {errors.email && <p className="text-red-500">{errors.email}</p>}
 
                 <input
-                  type="text"
                   name="subject"
-                  placeholder="Subject"
                   value={formData.subject}
                   onChange={handleChange}
+                  placeholder="Subject"
                   className="w-full p-4 border rounded-xl"
                 />
-                {errors.subject && (
-                  <p className="text-red-500">{errors.subject}</p>
-                )}
+                {errors.subject && <p className="text-red-500">{errors.subject}</p>}
 
                 <textarea
-                  rows={5}
                   name="message"
-                  placeholder="Message"
                   value={formData.message}
                   onChange={handleChange}
+                  placeholder="Message"
+                  rows={5}
                   className="w-full p-4 border rounded-xl"
                 />
-                {errors.message && (
-                  <p className="text-red-500">{errors.message}</p>
-                )}
+                {errors.message && <p className="text-red-500">{errors.message}</p>}
 
                 {/* CAPTCHA */}
                 <div>
                   <ReCAPTCHA
-                    sitekey="6LecFrcsAAAAANUxc3gZZKjT3AGKfu_BRT7_CAz5"
-                    onChange={handleCaptchaChange}
                     ref={recaptchaRef}
+                    sitekey="6LfCFrcsAAAAANOinzMyTv-WIPAX8y4cj0pcs-i_"
+                    onChange={handleCaptchaChange}
                   />
 
                   {errors.captcha && (
