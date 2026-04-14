@@ -130,7 +130,7 @@ export const Contact = () => {
               <FiPhone className="text-primary text-2xl" />
               <div>
                 <h3 className="text-xl font-semibold">Phone</h3>
-                <p>+977 9821121315</p>
+                <p>+977 9766196436</p>
               </div>
             </div>
 
