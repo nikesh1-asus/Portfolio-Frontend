@@ -9,11 +9,14 @@ import { Contact } from "@/sections/Contact";
 import { Footer } from "@/sections/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
 
-
 function App() {
   return (
     <div className="min-h-screen overflow-x-hidden">
+      
+      {/* Navbar */}
       <Navbar />
+
+      {/* Main Content */}
       <main>
         <Hero />
         <About />
@@ -22,43 +25,59 @@ function App() {
         <Projects />
         <Testimonials />
         <Contact />
-        {/* THIS is what you’re looking for */}
-      {/* You’ll add the new section right BELOW this */}
-      <section className="py-20">
-  <div className="container mx-auto px-6 text-center">
-    <h2 className="text-4xl font-bold mb-4">Building in Public</h2>
-    <p className="text-muted-foreground mb-12">
-      Passionate about open-source development and contributing to the community
-    </p>
 
-    <div className="grid md:grid-cols-3 gap-6">
-      <div className="glass text-center">
-        <h3 className="text-xl font-semibold mb-2">Active</h3>
-        <p className="text-muted-foreground">Consistently building projects</p>
-      </div>
-      <div className="glass text-center">
-        <h3 className="text-xl font-semibold mb-2">Collaborative</h3>
-        <p className="text-muted-foreground">Open to working with others</p>
-      </div>
-      <div className="glass text-center">
-        <h3 className="text-xl font-semibold mb-2">Quality Code</h3>
-        <p className="text-muted-foreground">Clean and maintainable code</p>
-      </div>
-    </div>
+        {/* Extra Section */}
+        <section className="py-20">
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl font-bold mb-4">
+              Building in Public
+            </h2>
 
-    <div className="mt-10">
-      <a href="https://github.com/nikesh1-asus" className="glow-btn">
-        Check Out My GitHub
-      </a>
-    </div>
-  </div>
-</section>
-        
+            <p className="text-muted-foreground mb-12">
+              Passionate about open-source development and contributing to the community
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="glass text-center p-6">
+                <h3 className="text-xl font-semibold mb-2">Active</h3>
+                <p className="text-muted-foreground">
+                  Consistently building projects
+                </p>
+              </div>
+
+              <div className="glass text-center p-6">
+                <h3 className="text-xl font-semibold mb-2">Collaborative</h3>
+                <p className="text-muted-foreground">
+                  Open to working with others
+                </p>
+              </div>
+
+              <div className="glass text-center p-6">
+                <h3 className="text-xl font-semibold mb-2">Quality Code</h3>
+                <p className="text-muted-foreground">
+                  Clean and maintainable code
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-10">
+              <a
+                href="https://github.com/nikesh1-asus"
+                target="_blank"
+                rel="noreferrer"
+                className="glow-btn"
+              >
+                Check Out My GitHub
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
+
       {/* Footer */}
       <Footer />
 
-      {/* Scroll to top button */}
+      {/* Scroll Button */}
       <ScrollToTop />
       
     </div>
