@@ -8,11 +8,20 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: "/Dev-Personal-Portfolio/", // Match repository name exactly
+
+  // ✅ IMPORTANT FIX (Render / Netlify / Vercel safe)
+  base: "./",
+
+  // optional but safe
   publicDir: "public",
+
+  build: {
+    outDir: "dist",
+  },
 });
