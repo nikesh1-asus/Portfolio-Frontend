@@ -130,7 +130,7 @@ export const Career = () => {
       <div className="max-w-5xl mx-auto px-4">
         {/* ================= HEADING ================= */}
         <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-10 animate-fade-in-up">
-          🧭 My{" "}
+           My{" "}
           <span className="italic text-[var(--color-primary)]">
             Journey
           </span>
