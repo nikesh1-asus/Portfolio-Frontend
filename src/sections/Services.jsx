@@ -33,12 +33,18 @@ const servicesData = [
 export const Services = () => {
   const [activeService, setActiveService] = useState(null);
 
-  // 🔒 Lock scroll when modal is open
+  // ✅ MOBILE SAFE SCROLL LOCK
   useEffect(() => {
-    document.body.style.overflow = activeService ? "hidden" : "auto";
+    if (activeService) {
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none"; // IMPORTANT for mobile
+    } else {
+      document.body.style.overflow = "auto";
+      document.body.style.touchAction = "auto";
+    }
   }, [activeService]);
 
-  // ⌨️ Close on ESC key
+  // ESC CLOSE (desktop)
   useEffect(() => {
     const handleKey = (e) => {
       if (e.key === "Escape") setActiveService(null);
@@ -49,7 +55,7 @@ export const Services = () => {
 
   return (
     <section id="services" className="py-20 px-6 text-center">
-      {/* Header */}
+      {/* HEADER */}
       <div className="mb-12">
         <h2 className="text-3xl font-bold glow-text">My Services</h2>
         <p className="text-muted-foreground text-sm mt-1">
@@ -57,13 +63,14 @@ export const Services = () => {
         </p>
       </div>
 
-      {/* Cards */}
+      {/* CARDS */}
       <div className="flex flex-wrap justify-center gap-6">
         {servicesData.map((service, index) => (
           <div
             key={index}
             onClick={() => setActiveService(service)}
-            className="glass p-6 rounded-xl w-64 cursor-pointer hover:scale-105 transition-all duration-300 glow-border"
+            onTouchStart={() => setActiveService(service)} // ✅ MOBILE FIX
+            className="glass p-6 rounded-xl w-64 cursor-pointer active:scale-95 hover:scale-105 transition-all duration-300 glow-border"
           >
             <h3 className="text-xl font-semibold mb-2">
               {service.title}
@@ -75,17 +82,19 @@ export const Services = () => {
         ))}
       </div>
 
-      {/* Modal */}
+      {/* MODAL */}
       {activeService && (
         <div
-          className="fixed inset-0 bg-black/60 flex items-center justify-center z-[9999]"
-          onClick={() => setActiveService(null)} // click outside closes
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-[9999]"
+          onClick={() => setActiveService(null)}
+          onTouchStart={() => setActiveService(null)} // mobile close fix
         >
           <div
-            className="glass-strong w-[90%] max-w-md p-6 rounded-xl relative animate-fade-in-up cursor-default"
-            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+            className="glass-strong w-[92%] max-w-md p-6 rounded-xl relative animate-fade-in-up cursor-default"
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()} // IMPORTANT mobile fix
           >
-            {/* Close Button */}
+            {/* CLOSE */}
             <button
               onClick={() => setActiveService(null)}
               className="absolute top-3 right-4 text-lg cursor-pointer"
@@ -93,12 +102,12 @@ export const Services = () => {
               ✖
             </button>
 
-            {/* Title */}
+            {/* TITLE */}
             <h3 className="text-2xl font-bold mb-4">
               {activeService.title}
             </h3>
 
-            {/* List */}
+            {/* LIST */}
             <ul className="space-y-2 text-left">
               {activeService.items.map((item, i) => (
                 <li key={i} className="flex items-start gap-2">

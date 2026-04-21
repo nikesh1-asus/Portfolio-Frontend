@@ -1,13 +1,8 @@
 import { useState } from "react";
-
+ 
 // ================= DATA =================
 const timelineData = {
   education: [
-    {
-      title: "MS in Software Engineering",
-      place: "Tribhuwan University, Nepal",
-      period: "2025 — Current",
-    },
     {
       title: "BSc. Computer System Engineering",
       place: "University of Sunderland, UK",
@@ -18,12 +13,12 @@ const timelineData = {
       place: "Trinity International College, Nepal",
       period: "2017 — 2019",
 
-    },
+    }, 
     {
       title: "Secondary Education Examination (SEE)",
       place: "Brighter Academy, Nepal",
       period: "2017",
-    },
+    }, 
 
   ],
   work: [
