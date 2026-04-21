@@ -18,7 +18,7 @@ const timelineData = {
       title: "Secondary Education Examination (SEE)",
       place: "Brighter Academy, Nepal",
       period: "2017",
-    },
+    }, 
 
   ],
   work: [
