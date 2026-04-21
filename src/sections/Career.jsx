@@ -13,7 +13,7 @@ const timelineData = {
       place: "Trinity International College, Nepal",
       period: "2017 — 2019",
 
-    },
+    }, 
     {
       title: "Secondary Education Examination (SEE)",
       place: "Brighter Academy, Nepal",
