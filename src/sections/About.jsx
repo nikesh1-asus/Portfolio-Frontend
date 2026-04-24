@@ -28,7 +28,7 @@ const highlights = [
 
 export const About = () => {
   return (
-    <section id="about" className="py-10 relative overflow-hidden">
+    <section id="about" className="py-10 md:py-16 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
 
@@ -68,7 +68,7 @@ export const About = () => {
 
             <div className="glass rounded-2xl p-8 glow-border animate-fade-in animation-delay-300">
               <p className="text-lg font-medium italic text-foreground">
-                "I don’t just build applications—I create scalable, high-performance digital experiences
+                "I don’t just build applications. I create scalable, high-performance digital experiences
                  that make a real impact."
               </p>
             </div>

@@ -120,7 +120,7 @@ export const Career = () => {
   return (
     <section
       id="career"
-      className="py-16 bg-[var(--color-background)] text-[var(--color-foreground)]"
+      className="py-10 md:py-16 bg-[var(--color-background)] text-[var(--color-foreground)]"
     >
       <div className="max-w-5xl mx-auto px-4">
         {/* ================= HEADING ================= */}
@@ -238,73 +238,77 @@ export const Career = () => {
 
         {/* ================= TIMELINE ================= */}
         {activeSection !== "skills" && (
-          <div key={activeSection} className="relative space-y-10">
-            {/* Desktop center line */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-[var(--color-primary)] -translate-x-1/2 timeline-glow"></div>
+          <div key={activeSection} className="relative mt-12 pb-12">
+            {/* The Continuous Vertical Line (Centered) */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[var(--color-primary)] opacity-40 md:w-1 -translate-x-1/2 timeline-glow" />
 
-            {timelineData[activeSection].map((item, i) => (
-              <div
-                key={i}
-                style={{ animationDelay: `${i * 0.2}s` }}
-                className="relative animate-fade-in-up"
-              >
-                {/* ================= MOBILE ================= */}
-                <div className="md:hidden flex items-start gap-4 relative timeline-item-mobile">
-                  {/* Dot + Line */}
-                  <div className="flex flex-col items-center">
-                    <div className="timeline-dot timeline-glow-mobile"></div>
-                    {i !== timelineData[activeSection].length - 1 && (
-                      <div className="timeline-line flex-1"></div>
-                    )}
-                  </div>
+            <div className="space-y-16">
+              {timelineData[activeSection].map((item, i) => {
+                const isEven = i % 2 === 0;
 
-                  {/* Content */}
-                  <div className="flex-1 bg-[var(--color-card)] p-4 rounded-lg glass shadow-md">
-                    <h3 className="font-semibold">{item.title}</h3>
-                    <p className="text-sm text-[var(--color-muted-foreground)]">
-                      {activeSection === "education"
-                        ? item.place
-                        : item.company}
-                    </p>
-                    <p className="text-sm text-[var(--color-primary)] mt-1">
-                      {item.period}
-                    </p>
-                    {item.description && (
-                      <p className="text-sm mt-2">{item.description}</p>
-                    )}
-                  </div>
-                </div>
-
-                {/* ================= DESKTOP ================= */}
-                <div className="hidden md:grid grid-cols-2 gap-8 items-center">
-                  {/* Dot */}
-                  <div className="absolute left-1/2 w-4 h-4 bg-[var(--color-primary)] rounded-full -translate-x-1/2 border-2 border-[var(--color-background)]"></div>
-
-                  {/* Content */}
+                return (
                   <div
-                    className={`${i % 2 === 0
-                        ? "text-right pr-12"
-                        : "col-start-2 pl-12"
-                      }`}
+                    key={i}
+                    style={{ animationDelay: `${i * 0.1}s` }}
+                    className="relative animate-fade-in-up flex flex-col items-center"
                   >
-                    <div className="bg-[var(--color-card)] p-5 rounded-xl glass shadow-md">
-                      <h3 className="font-semibold">{item.title}</h3>
-                      <p className="text-sm text-[var(--color-muted-foreground)]">
-                        {activeSection === "education"
-                          ? item.place
-                          : item.company}
-                      </p>
-                      <p className="text-sm text-[var(--color-primary)] mt-1">
-                        {item.period}
-                      </p>
-                      {item.description && (
-                        <p className="text-sm mt-2">{item.description}</p>
-                      )}
+                    {/* Timeline Dot */}
+                    <div className="absolute left-1/2 w-4 h-4 bg-[var(--color-primary)] rounded-full -translate-x-1/2 z-10 border-4 border-[var(--color-background)] shadow-[0_0_12px_rgba(32,178,166,0.6)]" />
+
+                    {/* Timeline Content Grid */}
+                    <div className="grid grid-cols-[1fr_auto_1fr] w-full items-center">
+                      
+                      {/* Left Side Content */}
+                      <div className={`flex flex-col px-4 md:px-12 ${isEven ? "items-end text-right" : "opacity-0 pointer-events-none"}`}>
+                        {isEven && (
+                          <div className="bg-[var(--color-card)] p-6 rounded-2xl glass hover:glow-border transition-all duration-300 relative group w-full max-w-sm">
+                            <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[var(--color-primary)] transition-colors leading-tight">
+                              {item.title}
+                            </h3>
+                            <p className="text-sm text-[var(--color-muted-foreground)] mb-3">
+                              {activeSection === "education" ? item.place : item.company}
+                            </p>
+                            <p className="text-xs text-[var(--color-primary)] font-bold bg-[var(--color-primary)]/5 inline-block px-3 py-1 rounded-full">
+                              {item.period}
+                            </p>
+                            {item.description && (
+                              <p className="text-xs text-gray-400 mt-4 italic leading-relaxed">
+                                {item.description}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Center Spacer */}
+                      <div className="w-4 md:w-12" />
+
+                      {/* Right Side Content */}
+                      <div className={`flex flex-col px-4 md:px-12 ${!isEven ? "items-start text-left" : "opacity-0 pointer-events-none"}`}>
+                        {!isEven && (
+                          <div className="bg-[var(--color-card)] p-6 rounded-2xl glass hover:glow-border transition-all duration-300 relative group w-full max-w-sm">
+                            <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[var(--color-primary)] transition-colors leading-tight">
+                              {item.title}
+                            </h3>
+                            <p className="text-sm text-[var(--color-muted-foreground)] mb-3">
+                              {activeSection === "education" ? item.place : item.company}
+                            </p>
+                            <p className="text-xs text-[var(--color-primary)] font-bold bg-[var(--color-primary)]/5 inline-block px-3 py-1 rounded-full">
+                              {item.period}
+                            </p>
+                            {item.description && (
+                              <p className="text-xs text-gray-400 mt-4 italic leading-relaxed">
+                                {item.description}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
         )}
       </div>

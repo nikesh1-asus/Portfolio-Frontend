@@ -1,7 +1,7 @@
 // src/sections/Footer.jsx
 export const Footer = () => {
   return (
-    <footer className="bg-background/80 py-8 mt-16 border-t border-primary/30">
+    <footer className="bg-background/80 py-8 mt-6 md:mt-16 border-t border-primary/30">
       <div className="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
         
         {/* Left: copyright */}

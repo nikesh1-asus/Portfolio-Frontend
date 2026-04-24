@@ -95,7 +95,7 @@ export const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="py-16 relative overflow-hidden bg-background"
+      className="py-10 md:py-16 relative overflow-hidden bg-background"
     >
       <div className="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-muted/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
 

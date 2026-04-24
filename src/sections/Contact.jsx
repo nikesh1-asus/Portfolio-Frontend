@@ -106,7 +106,7 @@ export const Contact = () => {
 
   // ---------------- UI ----------------
   return (
-    <section id="contact" className="py-16 bg-background/50">
+    <section id="contact" className="py-10 md:py-16 bg-background/50">
       <div className="container mx-auto px-6 max-w-6xl">
 
         <div className="text-center mb-12">
