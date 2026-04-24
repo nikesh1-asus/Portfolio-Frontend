@@ -22,6 +22,7 @@ export const Projects = () => {
       description:
         "Travel booking system with real-time availability and pricing.",
       technologies: ["PHP", "SQL", "CSS", "HTML", "JavaScript"],
+      tags: ["travel", "booking", "database", "backend"],
       image: `${base}projects/Travel.png`,
       github: "https://github.com/nikesh1-asus/Travel.git",
     },
@@ -29,6 +30,7 @@ export const Projects = () => {
       title: "E-commerce Platform",
       description: "Full shopping platform with cart and payments.",
       technologies: ["React", "Django", "Stripe"],
+      tags: ["shopping", "ecommerce", "payments", "fullstack"],
       image: `${base}projects/E-commerce.png`,
       github: "https://github.com/nikesh1-asus/E-Commerce-Site.git",
     },
@@ -36,6 +38,7 @@ export const Projects = () => {
       title: "Blog Management System",
       description: "Blog system with authentication and roles.",
       technologies: ["Django", "React", "SQLite"],
+      tags: ["blog", "cms", "auth", "web"],
       image: `${base}projects/blog.png`,
       github: "https://github.com/nikesh1-asus/Django-Blog.git",
     },
@@ -43,6 +46,7 @@ export const Projects = () => {
       title: "Suitcase Android App",
       description: "App for managing travel essentials.",
       technologies: ["Java", "Firebase", "Android Studio"],
+      tags: ["mobile", "android", "travel", "firebase"],
       image: `${base}projects/Suitcase-Android-App.png`,
       github: "https://github.com/nikesh1-asus/Suitcase-App.git",
     },
@@ -50,6 +54,7 @@ export const Projects = () => {
       title: "Heart Disease Prediction",
       description: "ML model for predicting heart disease.",
       technologies: ["Python", "TensorFlow", "Pandas"],
+      tags: ["ml", "ai", "healthcare", "data"],
       image: `${base}projects/Heart-Disease-Prediction.png`,
       github: "https://github.com/nikesh1-asus/Heart-Diseases-Prediction.git",
     },
@@ -57,13 +62,14 @@ export const Projects = () => {
       title: "Weather Forecasting App",
       description: "ML-based weather prediction system.",
       technologies: ["Python", "TensorFlow", "Pandas"],
+      tags: ["ml", "weather", "prediction", "ai"],
       image: `${base}projects/weather.png`,
       github: "https://github.com/nikesh1-asus/Weather-App.git",
     },
   ];
 
   const filteredProjects = projects.filter((project) =>
-    `${project.title} ${project.description} ${project.technologies.join(" ")}`
+    `${project.title} ${project.description} ${project.technologies.join(" ")} ${project.tags.join(" ")}`
       .toLowerCase()
       .includes(searchQuery.toLowerCase())
   );
@@ -78,26 +84,55 @@ export const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-20 bg-background text-foreground relative"
+      className="py-10 md:py-16 bg-background text-foreground relative"
     >
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-4xl font-bold mb-6 glow-text">
           My Selected Projects
         </h2>
 
-        <motion.input
-          type="text"
-          placeholder="Search projects"
-          value={searchQuery}
-          onChange={(e) => {
-            setSearchQuery(e.target.value);
-            setCurrentPage(1);
-          }}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="w-full mb-8 px-4 py-2 border rounded-lg bg-background text-foreground"
-        />
+        <div className="relative mb-8">
+          <motion.input
+            type="text"
+            placeholder="Search projects"
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(1);
+            }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="w-full px-4 py-3 border rounded-xl bg-background text-foreground focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+          />
+          
+          {/* LIVE SUGGESTIONS (YouTube-like) */}
+          <AnimatePresence>
+            {searchQuery.length > 0 && filteredProjects.length > 0 && (
+              <motion.ul
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="absolute top-full left-0 w-full bg-[#0f1418]/80 backdrop-blur-md border border-border mt-2 rounded-xl shadow-2xl z-[100] overflow-hidden"
+              >
+                {filteredProjects.slice(0, 5).map((project) => (
+                  <li
+                    key={project.title}
+                    onClick={() => {
+                      setSelectedProject(project);
+                      setOpenFullView(true);
+                      setSearchQuery("");
+                    }}
+                    className="px-4 py-3 hover:bg-primary/10 cursor-pointer flex items-center justify-between group"
+                  >
+                    <span className="text-sm font-medium">{project.title}</span>
+                    <span className="text-xs text-muted-foreground group-hover:text-primary">view project</span>
+                  </li>
+                ))}
+              </motion.ul>
+            )}
+          </AnimatePresence>
+        </div>
 
         {filteredProjects.length === 0 && (
           <p className="text-center text-muted-foreground">

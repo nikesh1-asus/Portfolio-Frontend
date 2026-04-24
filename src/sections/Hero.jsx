@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { FaGithub, FaLinkedin, FaFacebook, FaDownload, FaEye } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
 import Typed from "typed.js";
 
 export const Hero = () => {
-  const location = useLocation();
   const typedRef = useRef(null);
 
   const [showModal, setShowModal] = useState(false);
@@ -49,7 +47,6 @@ export const Hero = () => {
   const socialLinks = [
     { href: "https://github.com/nikesh1-asus", icon: <FaGithub size={22} /> },
     { href: "https://www.linkedin.com/in/nikesh-ojha-3698a7223/", icon: <FaLinkedin size={22} /> },
-    { href: "https://www.facebook.com/nikesh.ojha.752", icon: <FaFacebook size={22} /> },
   ];
 
   // 📄 FIXED FILE PATHS
@@ -60,11 +57,11 @@ export const Hero = () => {
     <section
       id="home"
       onMouseMove={handleMouseMove}
-      className="min-h-[100dvh] pt-16 md:pt-0 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 lg:gap-28 px-6 md:px-20 lg:px-32"
+      className="relative pt-32 pb-10 md:pt-40 md:pb-12 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 lg:gap-28 px-6 md:px-20 lg:px-32"
     >
 
       {/* SOCIAL DESKTOP */}
-      <div className="hidden md:flex flex-col gap-4 fixed left-4 top-1/2 transform -translate-y-1/2 z-[1000]">
+      <div className="hidden md:flex flex-col gap-4 absolute left-4 top-1/2 transform -translate-y-1/2 z-[1000]">
         {socialLinks.map((link, idx) => (
           <a
             key={idx}
