@@ -30,13 +30,11 @@ I focus on writing clean, maintainable code and creating intuitive user experien
 ### Backend (Projects)
 
 * Node.js
-* Django
-* PHP
 
 ### Database
 
 * MongoDB
-* MySQL
+
 
 ### Tools & Platforms
 
