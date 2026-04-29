@@ -54,7 +54,7 @@ export const Hero = () => {
   const profileImg = `${base}Nikesh_Ojha.jpg`;  
 
   return (
-    <section
+    <section  
       id="home"
       onMouseMove={handleMouseMove}
       className="relative pt-32 pb-10 md:pt-40 md:pb-12 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 lg:gap-28 px-6 md:px-20 lg:px-32"
