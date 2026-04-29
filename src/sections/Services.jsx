@@ -30,6 +30,15 @@ const servicesData = [
       "Lighting setup",
     ],
   },
+  {
+    title: "Networking",
+    items: [
+      "Network setup and configuration",
+      "Troubleshooting connectivity issues",
+      "Managing routers and switches",
+      "Securing network infrastructure",
+    ],
+  },
 ];
 
 export const Services = () => {

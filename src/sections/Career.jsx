@@ -4,7 +4,7 @@ import { useState } from "react";
 const timelineData = {
   education: [
     {
-      title: "BSc. Computer System Engineering",
+      title: "BSc. Hons Computer System Engineering",
       place: "University of Sunderland, UK",
       period: "2019 — 2023",
     },
