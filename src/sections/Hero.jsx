@@ -51,7 +51,7 @@ export const Hero = () => {
 
   // 📄 FIXED FILE PATHS
   const cvFile = `${base}Nikesh.pdf`;
-  const profileImg = `${base}Nikesh_Ojha.jpg`;  
+  const profileImg = `${base}Nikesh.png`;  
 
   return (
     <section  
