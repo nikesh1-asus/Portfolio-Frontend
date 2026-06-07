@@ -42,7 +42,7 @@ export const Navbar = () => {
         
         {/* Logo */}
         <a href="#home" className="text-2xl font-bold hover:text-primary">
-          NO<span className="text-primary">.</span>
+          N<span className="text-primary">.</span>
         </a>
 
         {/* Desktop Menu */}
