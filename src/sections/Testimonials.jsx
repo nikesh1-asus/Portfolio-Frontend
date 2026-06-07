@@ -17,9 +17,9 @@ const testimonials = [
       "He consistently delivers projects on time and helps improve our system architecture significantly.",
       "His creativity and problem-solving skills make him a joy to work with.",
     ],
-    name: "Suresh Shrestha",
+    name: "Abhaya Thapa",
     title: "Client",
-    image: `${base}Suresh.png`,
+    image: `${base}Abhaya.png`,
     rating: 4,
   },
   {
