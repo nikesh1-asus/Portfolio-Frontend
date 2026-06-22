@@ -25,7 +25,7 @@ const timelineData = {
     {
       title: "Full Stack Engineer",
       company: "Ziva Medico Pvt. Ltd.",
-      period: "February 2024 — Present",
+      period: "July 2024 — Present",
       description: "Built and maintained multiple React and Node.js applications.",
     },
   ],
