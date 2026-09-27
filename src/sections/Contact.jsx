@@ -6,7 +6,6 @@ const API_BASE_URL =
   import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
   "http://localhost:5000";
 
-<<<<<<< HEAD
 // ---- palette (matched to the reference image) ----
 const COLORS = {
   bg: "#0F1418",
@@ -17,8 +16,6 @@ const COLORS = {
   error: "#FF4D4D",
 };
 
-=======
->>>>>>> 409e734874fade20657a655425a871dad9414b49
 export const Contact = () => {
   const recaptchaRef = useRef(null);
 
@@ -33,10 +30,7 @@ export const Contact = () => {
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
-<<<<<<< HEAD
   const [submitting, setSubmitting] = useState(false);
-=======
->>>>>>> 409e734874fade20657a655425a871dad9414b49
 
   // ---------------- INPUT ----------------
   const handleChange = (e) => {
@@ -85,11 +79,8 @@ export const Contact = () => {
       return;
     }
 
-<<<<<<< HEAD
     setSubmitting(true);
 
-=======
->>>>>>> 409e734874fade20657a655425a871dad9414b49
     try {
       const res = await fetch(`${API_BASE_URL}/api/contact`, {
         method: "POST",
@@ -99,11 +90,7 @@ export const Contact = () => {
           email: formData.email,
           subject: formData.subject,
           message: formData.message,
-<<<<<<< HEAD
           captchaValue: captchaValue,
-=======
-          captchaValue: captchaValue, // IMPORTANT
->>>>>>> 409e734874fade20657a655425a871dad9414b49
         }),
       });
 
@@ -115,10 +102,6 @@ export const Contact = () => {
         return;
       }
 
-<<<<<<< HEAD
-=======
-      // SUCCESS
->>>>>>> 409e734874fade20657a655425a871dad9414b49
       setSuccess(true);
       setFormData({ name: "", email: "", subject: "", message: "" });
       setCaptchaValue(null);
@@ -130,7 +113,6 @@ export const Contact = () => {
     } catch (err) {
       console.error(err);
       setSubmitError("Unable to reach server. Try again.");
-<<<<<<< HEAD
     } finally {
       setSubmitting(false);
     }
@@ -155,19 +137,6 @@ export const Contact = () => {
             Contact Me
           </h2>
           <p className="mt-2" style={{ color: COLORS.muted }}>Get in touch</p>
-=======
-    }
-  };
-
-  // ---------------- UI ----------------
-  return (
-    <section id="contact" className="py-10 md:py-16 bg-background/50">
-      <div className="container mx-auto px-6 max-w-6xl">
-
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold">Contact Me</h2>
-          <p className="text-muted-foreground mt-2">Get in touch</p>
->>>>>>> 409e734874fade20657a655425a871dad9414b49
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
@@ -175,24 +144,16 @@ export const Contact = () => {
           {/* LEFT */}
           <div className="space-y-8">
             <div className="flex items-center gap-4">
-<<<<<<< HEAD
               <FiMapPin style={{ color: COLORS.accent }} className="text-2xl shrink-0" />
               <div>
                 <h3 className="text-lg font-semibold" style={{ color: COLORS.text }}>
                   Location
                 </h3>
                 <p style={{ color: COLORS.muted }}>Simara -01 Bara, Nepal</p>
-=======
-              <FiMapPin className="text-primary text-2xl" />
-              <div>
-                <h3 className="text-xl font-semibold">Location</h3>
-                <p>Simara -01 Bara, Nepal</p>
->>>>>>> 409e734874fade20657a655425a871dad9414b49
               </div>
             </div>
 
             <div className="flex items-center gap-4">
-<<<<<<< HEAD
               <FiPhone style={{ color: COLORS.accent }} className="text-2xl shrink-0" />
               <div>
                 <h3 className="text-lg font-semibold" style={{ color: COLORS.text }}>
@@ -206,17 +167,10 @@ export const Contact = () => {
                 >
                   +977 9766196436
                 </a>
-=======
-              <FiPhone className="text-primary text-2xl" />
-              <div>
-                <h3 className="text-xl font-semibold">Phone</h3>
-                <p>+977 9766196436</p>
->>>>>>> 409e734874fade20657a655425a871dad9414b49
               </div>
             </div>
 
             <div className="flex items-center gap-4">
-<<<<<<< HEAD
               <FiMail style={{ color: COLORS.accent }} className="text-2xl shrink-0" />
               <div>
                 <h3 className="text-lg font-semibold" style={{ color: COLORS.text }}>
@@ -231,19 +185,12 @@ export const Contact = () => {
                 >
                   nikeshojha71@gmail.com
                 </a>
-=======
-              <FiMail className="text-primary text-2xl" />
-              <div>
-                <h3 className="text-xl font-semibold">Email</h3>
-                <p>nikeshojha71@gmail.com</p>
->>>>>>> 409e734874fade20657a655425a871dad9414b49
               </div>
             </div>
           </div>
 
           {/* RIGHT */}
           <div>
-<<<<<<< HEAD
             {success ? (
               <div
                 className="h-full flex items-center justify-center rounded-2xl py-16"
@@ -323,55 +270,11 @@ export const Contact = () => {
                   )}
                 </div>
 
-=======
-            {!success && (
-              <form onSubmit={handleSubmit} className="space-y-6">
-
-                <input
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Name"
-                  className="w-full p-4 border rounded-xl"
-                />
-                {errors.name && <p className="text-red-500">{errors.name}</p>}
-
-                <input
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Email"
-                  className="w-full p-4 border rounded-xl"
-                />
-                {errors.email && <p className="text-red-500">{errors.email}</p>}
-
-                <input
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder="Subject"
-                  className="w-full p-4 border rounded-xl"
-                />
-                {errors.subject && <p className="text-red-500">{errors.subject}</p>}
-
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Message"
-                  rows={5}
-                  className="w-full p-4 border rounded-xl"
-                />
-                {errors.message && <p className="text-red-500">{errors.message}</p>}
-
-                {/* CAPTCHA */}
->>>>>>> 409e734874fade20657a655425a871dad9414b49
                 <div>
                   <ReCAPTCHA
                     ref={recaptchaRef}
                     sitekey="6LfCFrcsAAAAANOinzMyTv-WIPAX8y4cj0pcs-i_"
                     onChange={handleCaptchaChange}
-<<<<<<< HEAD
                     theme="dark"
                   />
                   {errors.captcha && (
@@ -397,35 +300,6 @@ export const Contact = () => {
                 </button>
               </form>
             )}
-=======
-                  />
-
-                  {errors.captcha && (
-                    <p className="text-red-500 mt-2">{errors.captcha}</p>
-                  )}
-
-                  {submitError && (
-                    <p className="text-red-500 mt-2">{submitError}</p>
-                  )}
-                </div>
-
-                {/* BUTTON */}
-                <button
-                  type="submit"
-                  className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl"
-                >
-                  <FiSend />
-                  Send Message
-                </button>
-              </form>
-            )}
-
-            {success && (
-              <p className="text-green-500 text-center text-lg font-semibold">
-                🚀 Message sent successfully!
-              </p>
-            )}
->>>>>>> 409e734874fade20657a655425a871dad9414b49
           </div>
         </div>
       </div>
